@@ -15,3 +15,19 @@ class Test_author(unittest.TestCase):
 
         nonexisting_book = Author(non_existing_name)
         self.assertFalse(nonexisting_book._get_author_in_list())
+
+    def test_save(self):
+        author_name = "Brandon Sanderson"
+        birth_year = 1975
+        author = Author(author_name)
+        author.birth_year = birth_year
+        success, message = author.save()
+        self.assertTrue(success)
+
+        author2 = Author(author_name)
+        self.assertEqual(author2.birth_year, birth_year)
+        success2, message2 = author2.save()
+
+        self.assertFalse(success2)
+
+
