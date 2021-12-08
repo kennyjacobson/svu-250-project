@@ -28,8 +28,12 @@ class Book():
                 return book
         return None
 
-    #TODO: update_year()
-    # update the year field and save
+    def update_year(self, updatedYear):
+        '''If book does not already exist in database, it will be saved.'''
+        self.year = updatedYear
+        if self._get_book_in_list():
+            self.remove()
+        self.save()
 
     #TODO: add_author()
     # make sure the author exists
@@ -43,12 +47,13 @@ class Book():
     # subract book's year from current year
     # return the value
 
-    #TODO: search()
-    #  return a list of books whose title starts with whatever the user used to create the book object
-    #  example:
-    #   book_A = Book("A")
-    #   list_A = book_A.search()
-    #   list_A contains all the books that start with "A" like "A Swiftly Tilting Planet", "Absalom, Absalom!", etc.
+    def search(self):
+        foundBooks = []
+        # startingLetter = self.title[0]
+        for book in self.book_list:
+            if self.title in book["title"]:
+                foundBooks.append(book)
+        return foundBooks
 
     def remove(self):
         for book in self.book_list:
