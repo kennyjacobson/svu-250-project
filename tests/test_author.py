@@ -30,4 +30,14 @@ class Test_author(unittest.TestCase):
 
         self.assertFalse(success2)
 
+    def test_update_author_birth_year(self):
+        new_author = Author("Stephen King")
+        new_author.birth_year = 2000
+        new_author.save()
 
+        new_author2 = Author("Stephen King")
+        self.assertEqual(new_author.birth_year, new_author2.birth_year)
+
+        updated_birth_year = 1947
+        new_author.update_author_birth_year(updated_birth_year)
+        self.assertEqual(updated_birth_year, new_author.birth_year)
