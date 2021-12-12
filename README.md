@@ -30,3 +30,13 @@ author.birth_year = 1974
 was_author_saved, message = book.save()
 print(was_author_saved, message)
 ```
+### Parse an author's name
+
+```python
+from library.classes.author import Author
+author = Author("Emily Dickinson")
+author_first_name = ("Emily")
+author_last_name = ("Dickinson")
+parse_first_name, pasrse_last_name = author.save()
+print(parse_first_name, parse_last_name, message)
+```
