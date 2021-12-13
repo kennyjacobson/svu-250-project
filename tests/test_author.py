@@ -41,3 +41,14 @@ class Test_author(unittest.TestCase):
         updated_birth_year = 1947
         new_author.update_author_birth_year(updated_birth_year)
         self.assertEqual(updated_birth_year, new_author.birth_year)
+
+    def test_parse_author_name(self):
+        author_name = "Jules Varne"
+        parse_first_name = "Jules"
+        parse_last_name = "Varne"
+        author = Author(author_name)
+        author.first_name = parse_first_name
+        author.last_name = parse_last_name
+        success, message = author.save()
+        self.assertTrue(success)
+        
