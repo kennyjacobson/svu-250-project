@@ -20,6 +20,7 @@ class Author():
         author = self._get_author_in_list()
         if(author):
             self.full_name = author["full_name"]
+            self.birth_year = author["birth_year"]
             
     
     def _get_author_in_list(self):
@@ -27,13 +28,49 @@ class Author():
             if self.full_name == author["full_name"]:
                 return author
         return None
+    
+    
+    
+    def update_author_birth_year(self, updatedYear):
+        '''If author does not already exist in database, it will be saved.'''
+        self.birth_year = updatedYear
+        if self._get_author_in_list():
+            self.remove()
+            self.save()
 
     #TODO: save() 
     # see book.py save() for guidance
+    def save(self):
+
+        '''Saves the author to the database. 
+        Returns was_author_saved (bool) and message.
+        If the author already exists, the author will not save.'''
+
+        if(self._get_author_in_list()):
+            return False, "Book already exists."
+
+        author = {
+            "full_name" : self.full_name,
+            "birth_year" : self.birth_year
+        }
+        self.author_list.append(author)
+        with open(self.data_location, "w") as authors:
+            json.dump(self.author_list, authors)
+        return True, "Success."
+
+       
+
 
     #TODO: remove() 
     # see book.py remove() for guidance
-
+    def remove(self):
+        for author in self.author_list:
+            if self.full_name == author["full_name"]:
+                self.author_list.remove(author)
+                with open(self.data_location, "w") as authors:
+                    json.dump(self.author_list, authors)
+                return True, "Successfully removed."
+        return False, "Not found."
     #TODO: get_author_age()
     # subract author's birth_year from current year
     # return the value
