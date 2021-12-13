@@ -21,6 +21,33 @@ was_book_saved, message = book.remove()
 print(was_book_saved, message)
 ```
 
+
+### Creating a user
+
+```python
+from library.classes.user import User
+username = "Username"
+password = "password123"
+the_user = user(username)
+username.create(password)
+
+```
+
+### Logging in
+
+```python
+from library.classes.user import User
+username = "Username"
+password = "password123"
+the_user = user(username)
+successful_login = the_user.login(password)
+if successful_login:
+    print("Login successful.")
+else:
+    print("Login unsuccessful.")
+    
+```
+
 ### Creating an author
 
 ```python
@@ -30,3 +57,4 @@ author.birth_year = 1974
 was_author_saved, message = book.save()
 print(was_author_saved, message)
 ```
+
