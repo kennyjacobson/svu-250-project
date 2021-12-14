@@ -21,6 +21,18 @@ was_book_saved, message = book.remove()
 print(was_book_saved, message)
 ```
 
+### Adding a Category
+
+```python
+from library.classes.categories import Categories
+name = "Fantasy"
+keyword = "Dragon"
+new_category = Categories()
+was_added, message = new_category.add_category(name, keyword)
+print(was_added, message)
+```
+
+
 
 ### Creating a user
 
@@ -68,4 +80,5 @@ author_last_name = ("Dickinson")
 parse_first_name, pasrse_last_name = author.save()
 print(parse_first_name, parse_last_name, message)
 ```
+
 
