@@ -81,4 +81,25 @@ parse_first_name, pasrse_last_name = author.save()
 print(parse_first_name, parse_last_name, message)
 ```
 
+### Search for a keyword in book's title
 
+```python
+from library.classes.book import Book
+keyword = Book("Pirate")
+keyword.search()
+```
+
+### Update a book's year
+
+```python
+#If book already exists in database:
+from library.classes.book import Book
+book = Book("Peter and the Starcatchers")
+book.save()
+book.update_year(2004)
+
+#if book doesn't already exist in database:
+from library.classes.book import Book
+book = Book("Ender's Game")
+book.year = 1945
+book.update_year(1985)
