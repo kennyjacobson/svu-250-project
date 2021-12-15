@@ -1,5 +1,6 @@
 import unittest
 import json
+from library.classes import author
 from library.classes.author import Author
 
 test_data_location = "tests/data/authors.json"
@@ -30,6 +31,7 @@ class Test_author(unittest.TestCase):
 
         self.assertFalse(success2)
 
+
     def test_update_author_birth_year(self):
         new_author = Author("Stephen King")
         new_author.birth_year = 2000
@@ -51,4 +53,23 @@ class Test_author(unittest.TestCase):
         author.last_name = parse_last_name
         success, message = author.save()
         self.assertTrue(success)
+    
+    def test_remove(self):
+        title = "Lord Tennyson"
+
+        new_author = Author(title)
+        new_author.birth_year = 1947
+        was_saved, _ = new_author.save()
+        self.assertTrue(was_saved)
+
+        was_removed, _ = new_author.remove()
+        self.assertTrue(was_removed)
+
+        was_removed, _ = new_author.remove()
+        self.assertFalse(was_removed)
+
+        author_check = Author(title)
+        self.assertFalse(author_check._get_author_in_list())
+
+
         
