@@ -30,3 +30,16 @@ new_category = Categories()
 was_added, message = new_category.add_category(name, keyword)
 print(was_added, message)
 ```
+### Categorizing a Book
+
+```python
+from library.classes.categories import Categories
+from library.classes.book import Book
+name = "Spy Novels"
+keyword = "Spy"
+title = "The Spy Who Loved Me"
+new_book = Book(title)
+new_category = Categories()
+does_exist, _ = new_category.categorize(new_book)
+print(does_exist, message)
+```
