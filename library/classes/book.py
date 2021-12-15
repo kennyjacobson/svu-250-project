@@ -1,5 +1,6 @@
 import json
 import sys
+from library.classes.author import Author
 data_location = "library/data/books.json"
 test_data_location = "tests/data/books.json"
 
@@ -9,6 +10,7 @@ class Book():
         self.year = 0
         self.book_list = []
         self.data_location = data_location
+        self.author_name = ""
 
         if 'unittest' in sys.modules:
             self.data_location = test_data_location
@@ -38,6 +40,15 @@ class Book():
     #TODO: add_author()
     # make sure the author exists
     # update the author property and save
+    # In book save, make sure to update variable name before db.
+    def add_author(self,author_name):
+        author = Author(author_name)
+        if author._get_author_in_list():
+            self.author_name = author_name
+            self.remove()
+            self.save()
+            return True, "Success"
+        return False, "Author doesn't exist"
 
     #TODO: add_category()
     # make sure the category exists
@@ -75,11 +86,11 @@ class Book():
             return False, "Book already exists."
         book = {
             "title" : self.title,
-            "year" : self.year
+            "year" : self.year,
+            "author name" : self.author_name
         }
         self.book_list.append(book)
         with open(self.data_location, "w") as books:
             json.dump(self.book_list, books)
         return True, "Success."
-    
         
