@@ -129,3 +129,28 @@ author.birth_year = 1845
 author.updated_birth_year(1854)
 author.save()
 ```
+
+
+### removing an author
+
+```python
+from library.classes.author import Author
+title = "Lord Tennyson"
+new_author = Author(title)
+was_author_saved, message = author.remove()
+print(was_author_saved, message)
+```
+
+### adding an author in book class
+
+```python
+from library.classes.book import Book
+author_name = "Gabriel Garcia-Marquez"
+book = Book("One Hundred Years of solitued")
+book.save()
+book.add_author(author_name)
+
+```
+
+
+

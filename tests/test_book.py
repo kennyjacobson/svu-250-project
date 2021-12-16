@@ -94,10 +94,10 @@ class Test_book(unittest.TestCase):
         book_check = Book(title)
         self.assertFalse(book_check._get_book_in_list())
 
-    #def test_add_author(self):
-        #author_name = "Gabriel Garcia-Marquez"
-        #book = Book("One Hundred Years of solitude")
-        #book.save()
-        #book.add_author(author_name)
-        #self.assertTrue(author_name == book.author_name)
+    def test_add_author(self):
+        author_name = "Gabriel Garcia-Marquez"
+        book = Book("One Hundred Years of solitude")
+        book.save()
+        book.add_author(author_name)
+        self.assertTrue(author_name == book.author_name)
 
