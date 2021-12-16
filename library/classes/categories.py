@@ -1,4 +1,5 @@
 import json
+from os import name
 import sys
 data_location = "library/data/categories.json"
 test_data_location = "tests/data/categories.json"
@@ -31,8 +32,17 @@ class Categories():
         with open(self.data_location, "w") as categories:
             json.dump(self.category_list, categories)
         return True, "Success."  
+     
+    def categorize(self, book):
+        print(book.title)
+        was_successful = False
+        message = "Category does not exist for book"
+        for category in self.category_list:
+            print(category["keyword"],book.title)
+            if category["keyword"].lower() in book.title.lower():
+                was_successful, message = True, category["name"]
+        return was_successful, message
 
-      
         
 
     #def add_category(name,keyword):
