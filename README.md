@@ -118,6 +118,17 @@ from library.classes.book import Book
 book = Book("Ender's Game")
 book.year = 1945
 book.update_year(1985)
+```
+
+### Update author birth year
+
+```python
+from library.classes.author import Author
+author = Author("Oscar Wilde")
+author.birth_year = 1845
+author.updated_birth_year(1854)
+author.save()
+```
 
 
 ### removing an author
@@ -138,6 +149,8 @@ author_name = "Gabriel Garcia-Marquez"
 book = Book("One Hundred Years of solitued")
 book.save()
 book.add_author(author_name)
-self.assertTrue(author_name == book.author_name)
+
 ```
+
+
 
