@@ -118,4 +118,14 @@ from library.classes.book import Book
 book = Book("Ender's Game")
 book.year = 1945
 book.update_year(1985)
+```
 
+### Update author birth year
+
+```python
+from library.classes.author import Author
+author = Author("Oscar Wilde")
+author.birth_year = 1845
+author.updated_birth_year(1854)
+author.save()
+```
