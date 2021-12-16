@@ -76,7 +76,6 @@ class Author():
 
 
     #TODO: remove() 
-    # see book.py remove() for guidance
     def remove(self):
         for author in self.author_list:
             if self.full_name == author["full_name"]:

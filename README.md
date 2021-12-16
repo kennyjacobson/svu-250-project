@@ -119,3 +119,22 @@ book = Book("Ender's Game")
 book.year = 1945
 book.update_year(1985)
 
+### Remove author
+def remove(self):
+        for author in self.author_list:
+            if self.full_name == author["full_name"]:
+                self.author_list.remove(author)
+                with open(self.data_location, "w") as authors:
+                    json.dump(self.author_list, authors)
+                return True, "Successfully removed."
+        return False, "Not found."
+
+### Add author in book class
+def add_author(self,author_name):
+        author = Author(author_name)
+        if author._get_author_in_list():
+            self.author_name = author_name
+            self.remove()
+            self.save()
+            return True, "Success"
+        return False, "Author doesn't exist"
