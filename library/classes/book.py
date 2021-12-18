@@ -1,6 +1,9 @@
 import json
 import sys
+from categories import Categories
+from datetime import date
 from library.classes.author import Author
+
 data_location = "library/data/books.json"
 test_data_location = "tests/data/books.json"
 
@@ -9,6 +12,7 @@ class Book():
         self.title = title
         self.year = 0
         self.book_list = []
+        self.category_name = ""
         self.data_location = data_location
         self.author_name = ""
 
@@ -56,8 +60,20 @@ class Book():
     #TODO: add_category()
     # make sure the category exists
     # update the category property and save
+    def add_category(self,category_name):
+        category = Categories(category_name)
+        if category._get_category_in_list():
+            self.category_name = category_name
+            self.remove()
+            self.save()
+            return True, "Successfull"
+        return False, "Category does not exist"
 
     #TODO: get_book_age()
+    def get_book_age(book):
+        todays_date = date.today()
+        age = todays_date.year - book.year
+        return age
     # subract book's year from current year
     # return the value
 

@@ -85,6 +85,10 @@ was_author_saved, message = book.save()
 print(was_author_saved, message)
 ```
 
+
+
+```
+
 ### Parse an author's name
 
 ```python
@@ -119,6 +123,25 @@ book = Book("Ender's Game")
 book.year = 1945
 book.update_year(1985)
 ```
+
+
+### Adding a category in Books
+
+```python
+from library.classes.book import Book
+category_name = “Horror”
+book = (“It”)
+book.save()
+book.add_category(category_name) 
+```
+### Getting Books age
+
+```python
+from library.classes.book import Book
+book = Book("It")
+book.year = 1986
+age = book.get_book_age()
+print(age)
 
 ### Update author birth year
 
