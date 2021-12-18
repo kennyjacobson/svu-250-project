@@ -2,6 +2,8 @@ import json
 import sys
 from categories import Categories
 from datetime import date
+from library.classes.author import Author
+
 data_location = "library/data/books.json"
 test_data_location = "tests/data/books.json"
 
@@ -12,6 +14,7 @@ class Book():
         self.book_list = []
         self.category_name = ""
         self.data_location = data_location
+        self.author_name = ""
 
         if 'unittest' in sys.modules:
             self.data_location = test_data_location
@@ -31,12 +34,28 @@ class Book():
                 return book
         return None
 
-    #TODO: update_year()
-    # update the year field and save
+    def update_year(self, updatedYear):
+        '''If book does not already exist in database, it will be saved.'''
+        self.year = updatedYear
+        if self._get_book_in_list():
+            self.remove()
+        self.save()
 
     #TODO: add_author()
     # make sure the author exists
     # update the author property and save
+    # In book save, make sure to update variable name before db.
+    def add_author(self,author_name):
+        author = Author(author_name)
+        if author._get_author_in_list():
+            self.author_name = author_name
+            self.remove()
+            self.save()
+            return True, "Success"
+        return False, "Author doesn't exist"
+
+                
+            
 
     #TODO: add_category()
     # make sure the category exists
@@ -58,12 +77,13 @@ class Book():
     # subract book's year from current year
     # return the value
 
-    #TODO: search()
-    #  return a list of books whose title starts with whatever the user used to create the book object
-    #  example:
-    #   book_A = Book("A")
-    #   list_A = book_A.search()
-    #   list_A contains all the books that start with "A" like "A Swiftly Tilting Planet", "Absalom, Absalom!", etc.
+    def search(self):
+        foundBooks = []
+        # startingLetter = self.title[0]
+        for book in self.book_list:
+            if self.title in book["title"]:
+                foundBooks.append(book)
+        return foundBooks
 
     def remove(self):
         for book in self.book_list:
@@ -85,11 +105,11 @@ class Book():
             return False, "Book already exists."
         book = {
             "title" : self.title,
-            "year" : self.year
+            "year" : self.year,
+            "author name" : self.author_name
         }
         self.book_list.append(book)
         with open(self.data_location, "w") as books:
             json.dump(self.book_list, books)
         return True, "Success."
-    
         

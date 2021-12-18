@@ -8,6 +8,8 @@ class Author():
         self.full_name = full_name
         self.birth_year = 0
         #TODO: parse out full_name into corresponding first_name and last_name
+        self.first_name = full_name.split()[0]
+        self.last_name = full_name.split()[1]
         self.author_list = []
         self.data_location = data_location
 
@@ -21,12 +23,31 @@ class Author():
         if(author):
             self.full_name = author["full_name"]
             self.birth_year = author["birth_year"]
-            
+            self.first_name = author["first_name"]
+            self.last_name = author["last_name"]
     
     def _get_author_in_list(self):
         for author in self.author_list:
             if self.full_name == author["full_name"]:
                 return author
+        return None
+    
+    
+    
+    def update_author_birth_year(self, updatedYear):
+        '''If author does not already exist in database, it will be saved.'''
+        self.birth_year = updatedYear
+        if self._get_author_in_list():
+            self.remove()
+            self.save()
+
+    def parse_author_name(self):
+        '''Parse the full name of the author to be first name and last name'''
+        for author in self.author_list:
+            if self.first_name == author["first_name"]:
+                return author.split()[0]
+            if self.last_name == author["last_name"]:
+                return author.split()[1]    
         return None
 
     #TODO: save() 
@@ -42,8 +63,10 @@ class Author():
 
         author = {
             "full_name" : self.full_name,
-            "birth_year" : self.birth_year
-        }
+            "birth_year" : self.birth_year,
+            "first_name" : self.first_name,
+            "last_name"  : self.last_name
+         }
         self.author_list.append(author)
         with open(self.data_location, "w") as authors:
             json.dump(self.author_list, authors)
@@ -54,7 +77,14 @@ class Author():
 
     #TODO: remove() 
     # see book.py remove() for guidance
-
+    def remove(self):
+        for author in self.author_list:
+            if self.full_name == author["full_name"]:
+                self.author_list.remove(author)
+                with open(self.data_location, "w") as authors:
+                    json.dump(self.author_list, authors)
+                return True, "Successfully removed."
+        return False, "Not found."
     #TODO: get_author_age()
     # subract author's birth_year from current year
     # return the value
