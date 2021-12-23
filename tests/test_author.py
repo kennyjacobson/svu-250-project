@@ -5,11 +5,12 @@ from library.classes.author import Author
 
 test_data_location = "tests/data/authors.json"
 
+
 class Test_author(unittest.TestCase):
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName=methodName)
         with open(test_data_location, "w") as books:
-                    json.dump([], books)
+            json.dump([], books)
 
     def test_get_author_in_list(self):
         non_existing_name = "Fred Dostoevsky"
@@ -30,7 +31,6 @@ class Test_author(unittest.TestCase):
         success2, message2 = author2.save()
 
         self.assertFalse(success2)
-
 
     def test_update_author_birth_year(self):
         new_author = Author("Stephen King")
@@ -53,7 +53,7 @@ class Test_author(unittest.TestCase):
         author.last_name = parse_last_name
         success, message = author.save()
         self.assertTrue(success)
-    
+
     def test_remove(self):
         title = "Lord Tennyson"
 
@@ -71,5 +71,24 @@ class Test_author(unittest.TestCase):
         author_check = Author(title)
         self.assertFalse(author_check._get_author_in_list())
 
+# Start of added test by Aaron
+    def test_get_author_age(self):
+        author1 = Author("Brandon Mull")
+        author1.full_name = "Brandon Mull"
+        author1.birth_year = 1997
+        author1.save()
+        new_Author = Author("Brandon Mull")
+        age = new_Author.get_author_age()
+        self.assertEqual(24, age)
 
-        
+    def test_search(self):
+        author1 = Author("Brandon Mull")
+        author1.full_name = "Brandon Mull"
+        author1.save()
+
+        last_name = "Mull"
+        new_Author = Author("Brandon Mull")
+        authorList = new_Author.search()
+        self.assertEqual("Mull", authorList[0]["last_name"])
+
+# End of added tests by Aaron

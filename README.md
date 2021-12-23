@@ -46,9 +46,6 @@ does_exist, _ = new_category.categorize(new_book)
 print(does_exist, message)
 ```
 
-
-
-
 ### Creating a user
 
 ```python
@@ -72,7 +69,7 @@ if successful_login:
     print("Login successful.")
 else:
     print("Login unsuccessful.")
-    
+
 ```
 
 ### Creating an author
@@ -83,10 +80,6 @@ author = Author("Melanie Jacobson")
 author.birth_year = 1974
 was_author_saved, message = book.save()
 print(was_author_saved, message)
-```
-
-
-
 ```
 
 ### Parse an author's name
@@ -124,7 +117,6 @@ book.year = 1945
 book.update_year(1985)
 ```
 
-
 ### Adding a category in Books
 
 ```python
@@ -132,8 +124,9 @@ from library.classes.book import Book
 category_name = “Horror”
 book = (“It”)
 book.save()
-book.add_category(category_name) 
+book.add_category(category_name)
 ```
+
 ### Getting Books age
 
 ```python
@@ -142,6 +135,7 @@ book = Book("It")
 book.year = 1986
 age = book.get_book_age()
 print(age)
+```
 
 ### Update author birth year
 
@@ -152,7 +146,6 @@ author.birth_year = 1845
 author.updated_birth_year(1854)
 author.save()
 ```
-
 
 ### removing an author
 
@@ -175,5 +168,23 @@ book.add_author(author_name)
 
 ```
 
+### Get Author's age
 
+```python
+    def get_author_age(self):
+        todays_date = date.today()
+        year = self.birth_year
+        age = todays_date.year - year
+        return age
+```
 
+### Search for an author's name
+
+```python
+    def search(self):
+        authorList = []
+        for Author in self.author_list:
+            if self.last_name in Author["last_name"]:
+                authorList.append(Author)
+        return authorList
+```
